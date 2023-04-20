@@ -7,4 +7,8 @@ describe('GET /api', () => {
     expect(res.status).toBe(200);
     expect(res.data).toEqual({ message: 'Hello API' });
   });
+  it('should return a static file', async () => {
+    const res = await axios.get(`/mdx/example.mdx`);
+    expect(res.status).toBe(200);
+  });
 });
