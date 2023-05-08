@@ -4,15 +4,17 @@ import {
   Card,
   CardContent,
   CardActions,
-  CircularProgress,
-  Modal,
-  Box,
+  Pagination,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useSWR from 'swr';
+import { posts } from '../../assets/posts';
+import React, { useState } from "react";
+import usePagination from "../utils/pagination.tsx";
 
-interface PostDto {
+
+export interface PostDto {
   id: string;
   description: string;
   title: string;
@@ -21,24 +23,7 @@ interface PostDto {
   authors: string[];
 }
 
-const posts: PostDto[] = [
-  {
-    id: 'x-1',
-    title: 'Mdx examples',
-    description: 'Example to demonstrate mdx format',
-    url: 'mdx/example.mdx',
-    tags: ['markdown'],
-    authors: ['Deepak Kumar'],
-  },
-  {
-    id: 'x-2',
-    title: 'Binary Heap',
-    description: 'A discussion about binary heap data structure',
-    url: 'mdx/binary-heap.mdx',
-    tags: ['data-structures', 'binary-heap', 'javascript', 'typescript'],
-    authors: ['Deepak Kumar'],
-  },
-];
+
 
 function PostListItem({ post }: { post: PostDto }) {
   return (
@@ -71,10 +56,35 @@ export function PostList() {
     // Refresh
     navigate(0);
   };
+  let [page, setPage] = useState(1);
+  const PER_PAGE = 5;
+
+  const count = Math.ceil(posts.length / PER_PAGE);
+  const _DATA = usePagination(posts, PER_PAGE);
+
+  const handleChange = (e, p) => {
+    setPage(p);
+    _DATA.jump(p);
+  };
+
   console.log(posts);
   return (
-    <Grid container>
-      {posts.map((post: PostDto) => (
+    <Grid container >
+       <Grid item sx={{ flexGrow: 1 }} align="center">
+       <Pagination
+        count={count}
+        size="large"
+        page={page}
+        variant="outlined"
+        shape="rounded"
+        onChange={handleChange}
+        sx={{pt: 2,pb: 2 ,justifyContent: 'center'}} 
+             
+      />
+      </Grid>
+      
+
+      {_DATA.currentData().map((post: PostDto) => (
         <Grid item xs={12} key={post.id}>
           <PostListItem post={post} key={post.id}></PostListItem>
         </Grid>

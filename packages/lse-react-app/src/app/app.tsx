@@ -59,7 +59,7 @@ export function App() {
         <Grid item>
           <LSEAppBar />
         </Grid>
-        <Grid item sx={{pt: 10 }}>
+        <Grid item sx={{pt: 10,pb: 10 }} >
           <PostList />
         </Grid>
         <Grid item>
