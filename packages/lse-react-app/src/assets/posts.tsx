@@ -1,6 +1,6 @@
 import { PostDto } from "../app/components/post-list";
 
-export const posts: PostDto[] = [
+export const posts: PostDto[] =[
     {
       id: 'x-1',
       title: 'Mdx examples',

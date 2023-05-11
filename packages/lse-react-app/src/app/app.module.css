@@ -1,1 +1,31 @@
 /* Your styles goes here. */
+.App {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+   
+  }
+  
+  .header,
+  .footer {
+    background: #00022e;
+    height: 50px;
+   
+  }
+  
+  .container {
+    display: flex;
+    flex: 1;
+  }
+  
+  .drawer {
+    
+    width: 240px;
+  }
+  
+  .main {
+    flex: 1;
+    
+  }
+  

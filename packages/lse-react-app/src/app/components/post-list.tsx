@@ -10,9 +10,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useSWR from 'swr';
 import { posts } from '../../assets/posts';
-import React, { useState } from "react";
-import usePagination from "../utils/pagination.tsx";
-
+import React, { useState } from 'react';
+import usePagination from '../utils/pagination.tsx';
 
 export interface PostDto {
   id: string;
@@ -22,8 +21,6 @@ export interface PostDto {
   tags: string[];
   authors: string[];
 }
-
-
 
 function PostListItem({ post }: { post: PostDto }) {
   return (
@@ -57,32 +54,30 @@ export function PostList() {
     navigate(0);
   };
   let [page, setPage] = useState(1);
-  const PER_PAGE = 5;
+  const PER_PAGE = 2;
 
   const count = Math.ceil(posts.length / PER_PAGE);
   const _DATA = usePagination(posts, PER_PAGE);
 
-  const handleChange = (e, p) => {
+  const handleChange = (e:React.ChangeEvent<unknown>, p:number) => {
     setPage(p);
     _DATA.jump(p);
   };
 
   console.log(posts);
   return (
-    <Grid container >
-       <Grid item sx={{ flexGrow: 1 }} align="center">
-       <Pagination
-        count={count}
-        size="large"
-        page={page}
-        variant="outlined"
-        shape="rounded"
-        onChange={handleChange}
-        sx={{pt: 2,pb: 2 ,justifyContent: 'center'}} 
-             
-      />
+    <Grid container>
+      <Grid item xs={12}>
+        <Pagination
+          count={count}
+          size="large"
+          page={page}
+          variant="outlined"
+          shape="rounded"
+          onChange={handleChange}
+          sx={{ pt: 2, pb: 2, background: '#e6e6e6' }}
+        />
       </Grid>
-      
 
       {_DATA.currentData().map((post: PostDto) => (
         <Grid item xs={12} key={post.id}>
