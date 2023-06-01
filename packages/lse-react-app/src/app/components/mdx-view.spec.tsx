@@ -12,9 +12,7 @@ describe('MdxView', () => {
     `);
 
     // console.log(String(mdxSource.compiledSource))
-    const { baseElement } = render(
-      <MDXRemote {...mdxSource} />
-    );
+    const { baseElement } = render(<MDXRemote {...mdxSource} />);
     expect(baseElement).toBeTruthy();
     //expect(screen.getByRole('heading')).toHaveTextContent('Testing MDX');
     //expect(baseElement.querySelector('strong')).toHaveTextContent('bold text');
